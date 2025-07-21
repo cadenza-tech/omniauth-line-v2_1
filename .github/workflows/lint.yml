@@ -1,0 +1,26 @@
+name: Lint
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/lint.yml'
+      - '.rubocop.yml'
+      - 'Gemfile'
+      - 'Rakefile'
+      - 'omniauth-line-v2_1.gemspec'
+      - '**/*.rb'
+permissions:
+  contents: read
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4
+          bundler-cache: true
+      - name: RuboCop
+        env:
+          RUBOCOP_FORMAT: github
+        run: bundle exec rake rubocop
