@@ -39,8 +39,7 @@ RSpec.describe OmniAuth::Strategies::LineV21 do # rubocop:disable RSpec/SpecFile
       {
         'sub' => 'U1234567890abcdefghijklmnopqrstuvwxyz',
         'name' => 'Test User',
-        'picture' => 'https://profile.line-scdn.net/avatar.jpg',
-        'email' => 'user@example.com'
+        'picture' => 'https://profile.line-scdn.net/avatar.jpg'
       }
     end
     let(:id_token_info) { { raw: nil, decoded: { 'email' => 'user@example.com' } } }
@@ -83,8 +82,7 @@ RSpec.describe OmniAuth::Strategies::LineV21 do # rubocop:disable RSpec/SpecFile
       {
         'sub' => 'U1234567890abcdefghijklmnopqrstuvwxyz',
         'name' => 'Test User',
-        'picture' => 'https://profile.line-scdn.net/avatar.jpg',
-        'email' => 'user@example.com'
+        'picture' => 'https://profile.line-scdn.net/avatar.jpg'
       }
     end
     let(:id_token_info) do
@@ -114,8 +112,7 @@ RSpec.describe OmniAuth::Strategies::LineV21 do # rubocop:disable RSpec/SpecFile
         raw_info: {
           'sub' => 'U1234567890abcdefghijklmnopqrstuvwxyz',
           'name' => 'Test User',
-          'picture' => 'https://profile.line-scdn.net/avatar.jpg',
-          'email' => 'user@example.com'
+          'picture' => 'https://profile.line-scdn.net/avatar.jpg'
         },
         id_token: 'test_id_token',
         id_info: {
