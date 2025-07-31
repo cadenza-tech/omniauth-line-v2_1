@@ -428,7 +428,7 @@ RSpec.describe OmniAuth::Strategies::LineV21 do # rubocop:disable RSpec/SpecFile
     context 'when verification fails' do
       let(:response) { instance_double(OAuth2::Response, parsed: nil) }
 
-      before { allow(strategy).to receive(:log) }
+      before { allow(strategy).to receive(:fail!) }
 
       it 'returns nil for decoded data' do
         id_token_info = strategy.send(:id_token_info)
@@ -502,13 +502,13 @@ RSpec.describe OmniAuth::Strategies::LineV21 do # rubocop:disable RSpec/SpecFile
     context 'when verification fails' do
       before do
         allow(client).to receive(:request).and_raise(StandardError, 'Verification failed')
-        allow(strategy).to receive(:log)
+        allow(strategy).to receive(:fail!)
       end
 
-      it 'logs error and returns nil' do
+      it 'calls fail! with verification error' do
         result = strategy.send(:verify_id_token, 'test_id_token')
         expect(result).to be_nil
-        expect(strategy).to have_received(:log).with(:error, 'ID token verification failed: Verification failed')
+        expect(strategy).to have_received(:fail!).with(:id_token_verification_failed, instance_of(StandardError))
       end
     end
   end
