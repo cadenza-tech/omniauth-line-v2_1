@@ -62,6 +62,7 @@ module OmniAuth
             params[v.to_sym] = request.params[v] if request.params[v]
           end
           params[:scope] ||= DEFAULT_SCOPE
+          params[:nonce] ||= SecureRandom.hex(24)
           params[:response_type] = 'code'
           session['omniauth.state'] = params[:state] if params[:state]
           session['omniauth.nonce'] = params[:nonce] if params[:nonce]
@@ -93,9 +94,9 @@ module OmniAuth
           id_token: id_token,
           client_id: options.client_id
         }
-        params[:nonce] = session['omniauth.nonce'] if session['omniauth.nonce']
+        params[:nonce] = session.delete('omniauth.nonce') if session['omniauth.nonce']
 
-        client.request(
+        response = client.request(
           :post,
           ID_TOKEN_VERIFY_URL,
           headers: {
@@ -103,9 +104,12 @@ module OmniAuth
           },
           body: URI.encode_www_form(params)
         ).parsed
+
+        fail!(:id_token_verification_failed, CallbackError.new(:id_token_verification_failed, response['error_description'])) if response['error']
+
+        response
       rescue StandardError => e
-        log :error, "ID token verification failed: #{e.message}"
-        nil
+        fail!(:id_token_verification_failed, e)
       end
     end
   end
