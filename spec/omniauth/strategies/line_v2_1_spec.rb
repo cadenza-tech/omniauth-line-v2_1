@@ -512,4 +512,46 @@ RSpec.describe OmniAuth::Strategies::LineV21 do # rubocop:disable RSpec/SpecFile
       end
     end
   end
+
+  describe '#empty?' do
+    it 'returns true for nil values' do
+      expect(strategy.send(:empty?, nil)).to be(true)
+    end
+
+    it 'returns true for empty strings' do
+      expect(strategy.send(:empty?, '')).to be(true)
+    end
+
+    it 'returns true for empty arrays' do
+      expect(strategy.send(:empty?, [])).to be(true)
+    end
+
+    it 'returns true for empty hashes' do
+      expect(strategy.send(:empty?, {})).to be(true)
+    end
+
+    it 'returns false for non-empty strings' do
+      expect(strategy.send(:empty?, 'value')).to be(false)
+    end
+
+    it 'returns false for non-empty arrays' do
+      expect(strategy.send(:empty?, [1, 2, 3])).to be(false)
+    end
+
+    it 'returns false for non-empty hashes' do
+      expect(strategy.send(:empty?, { key: 'value' })).to be(false)
+    end
+
+    it 'returns false for zero values' do
+      expect(strategy.send(:empty?, 0)).to be(false)
+    end
+
+    it 'returns false for false values' do
+      expect(strategy.send(:empty?, false)).to be(false)
+    end
+
+    it 'returns false for objects that do not respond to empty?' do
+      expect(strategy.send(:empty?, 123)).to be(false)
+    end
+  end
 end
