@@ -56,16 +56,16 @@ module OmniAuth
         options[:redirect_uri] || (full_host + callback_path)
       end
 
-      def authorize_params
+      def authorize_params # rubocop:disable Metrics/AbcSize
         super.tap do |params|
-          %w[scope state nonce prompt bot_prompt].each do |v|
-            params[v.to_sym] = request.params[v] if request.params[v]
+          options[:authorize_options].each do |key|
+            params[key] = request.params[key.to_s] unless empty?(request.params[key.to_s])
           end
           params[:scope] ||= DEFAULT_SCOPE
           params[:nonce] ||= SecureRandom.hex(24)
           params[:response_type] = 'code'
-          session['omniauth.state'] = params[:state] if params[:state]
-          session['omniauth.nonce'] = params[:nonce] if params[:nonce]
+          session['omniauth.state'] = params[:state] unless empty?(params[:state])
+          session['omniauth.nonce'] = params[:nonce] unless empty?(params[:nonce])
         end
       end
 
@@ -74,8 +74,12 @@ module OmniAuth
       def prune!(hash)
         hash.delete_if do |_, value|
           prune!(value) if value.is_a?(Hash)
-          value.nil? || (value.respond_to?(:empty?) && value.empty?)
+          empty?(value)
         end
+      end
+
+      def empty?(value)
+        value.nil? || (value.respond_to?(:empty?) && value.empty?)
       end
 
       def id_token_info
