@@ -5,8 +5,8 @@ require_relative 'lib/omniauth/line_v2_1/version'
 Gem::Specification.new do |spec|
   spec.name = 'omniauth-line-v2_1'
   spec.version = OmniAuth::LineV21::VERSION
-  spec.description = 'LINE Login v2.1 strategy for OmniAuth'
-  spec.summary = 'LINE Login v2.1 strategy for OmniAuth'
+  spec.description = 'LINE strategy for OmniAuth'
+  spec.summary = 'LINE strategy for OmniAuth'
   spec.authors = ['Masahiro']
   spec.email = ['watanabe@cadenza-tech.com']
   spec.license = 'MIT'

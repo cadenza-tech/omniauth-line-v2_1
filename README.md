@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/cadenza-tech/omniauth-line-v2_1?label=License&labelColor=343B42&color=blue)](https://github.com/cadenza-tech/omniauth-line-v2_1/blob/main/LICENSE.txt) [![Tag](https://img.shields.io/github/tag/cadenza-tech/omniauth-line-v2_1?label=Tag&logo=github&labelColor=343B42&color=2EBC4F)](https://github.com/cadenza-tech/omniauth-line-v2_1/blob/main/CHANGELOG.md) [![Release](https://github.com/cadenza-tech/omniauth-line-v2_1/actions/workflows/release.yml/badge.svg)](https://github.com/cadenza-tech/omniauth-line-v2_1/actions?query=workflow%3Arelease) [![Test](https://github.com/cadenza-tech/omniauth-line-v2_1/actions/workflows/test.yml/badge.svg)](https://github.com/cadenza-tech/omniauth-line-v2_1/actions?query=workflow%3Atest) [![Lint](https://github.com/cadenza-tech/omniauth-line-v2_1/actions/workflows/lint.yml/badge.svg)](https://github.com/cadenza-tech/omniauth-line-v2_1/actions?query=workflow%3Alint)
 
-LINE Login v2.1 strategy for OmniAuth.
+LINE strategy for OmniAuth.
 
 - [Installation](#installation)
 - [Usage](#usage)
