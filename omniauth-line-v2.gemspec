@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.5.0'
 
   gemspec = File.basename(__FILE__)
-  spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
+  spec.files = IO.popen(%w[git ls-files -z]) do |ls|
     ls.readlines("\x0").map { |f| f.chomp("\x0") }.reject do |f|
       (f == gemspec) || f.start_with?(*%w[bin/ test/ spec/ features/ .git .github .editorconfig .rubocop.yml appveyor CODE_OF_CONDUCT.md Gemfile])
     end
